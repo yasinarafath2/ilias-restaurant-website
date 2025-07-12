@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ইলিয়াস রেস্তোরাঁ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { box-sizing: border-box; font-family: 'Kalpurush', Arial, sans-serif; }
+        .container { padding: 15px; }
+        .menu-item { border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 10px; }
+        .item-image { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        h1 { text-align: center; color: #c00; }
+        .categories { text-align: center; margin: 20px 0; }
+        .category-btn { margin: 5px; padding: 8px 15px; background: #f0f0f0; border: none; border-radius: 5px; }
+        @media (min-width: 768px) {
+            .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ইলিয়াস রেস্তোরাঁ ও ক্যাফে</h1>
+        
+        <div class="categories">
+            <button class="category-btn" onclick="filterMenu('all')">সব আইটেম</button>
+            <button class="category-btn" onclick="filterMenu('বিরিয়ানি')">বিরিয়ানি</button>
+            <button class="category-btn" onclick="filterMenu('ফাস্ট ফুড')">ফাস্ট ফুড</button>
+            <button class="category-btn" onclick="filterMenu('ডেজার্ট')">ডেজার্ট</button>
+        </div>
+        
+        <div class="menu-grid">
+            {% for item in items %}
+            <div class="menu-item" data-category="{{ item.category }}">
+                <h3>{{ item.name }}</h3>
+                <p>দাম: ৳{{ item.price }}</p>
+                <p>ক্যাটাগরি: {{ item.category }}</p>
+                {% if item.image_path %}
+                <img src="{{ url_for('static', filename='uploads/' + item.image_path) }}" alt="{{ item.name }}" class="item-image">
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function filterMenu(category) {
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                if(category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
