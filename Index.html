@@ -1,58 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ইলিয়াস রেস্তোরাঁ</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * { box-sizing: border-box; font-family: 'Kalpurush', Arial, sans-serif; }
-        .container { padding: 15px; }
-        .menu-item { border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 10px; }
-        .item-image { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
-        h1 { text-align: center; color: #c00; }
-        .categories { text-align: center; margin: 20px 0; }
-        .category-btn { margin: 5px; padding: 8px 15px; background: #f0f0f0; border: none; border-radius: 5px; }
-        @media (min-width: 768px) {
-            .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Signup | Learn with Arshyan</title>
+  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>ইলিয়াস রেস্তোরাঁ ও ক্যাফে</h1>
-        
-        <div class="categories">
-            <button class="category-btn" onclick="filterMenu('all')">সব আইটেম</button>
-            <button class="category-btn" onclick="filterMenu('বিরিয়ানি')">বিরিয়ানি</button>
-            <button class="category-btn" onclick="filterMenu('ফাস্ট ফুড')">ফাস্ট ফুড</button>
-            <button class="category-btn" onclick="filterMenu('ডেজার্ট')">ডেজার্ট</button>
-        </div>
-        
-        <div class="menu-grid">
-            {% for item in items %}
-            <div class="menu-item" data-category="{{ item.category }}">
-                <h3>{{ item.name }}</h3>
-                <p>দাম: ৳{{ item.price }}</p>
-                <p>ক্যাটাগরি: {{ item.category }}</p>
-                {% if item.image_path %}
-                <img src="{{ url_for('static', filename='uploads/' + item.image_path) }}" alt="{{ item.name }}" class="item-image">
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
+
+  <div class="container">
+  <!-- Theme Toggle Switch -->
+<div class="theme-switch">
+  <input type="checkbox" id="theme-toggle">
+  <label for="theme-toggle" class="switch-label">
+    <span class="switch-ball">
+      <i class="fas fa-moon" id="moon-icon"></i>
+      <i class="fas fa-sun" id="sun-icon"></i>
+    </span>
+  </label>
+</div>
+
+
+
+    <!-- Tabs -->
+    <div class="tab-header">
+      <button class="tab-btn active" id="login-tab">Login</button>
+      <button class="tab-btn" id="signup-tab">Signup</button>
     </div>
 
-    <script>
-        function filterMenu(category) {
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                if(category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    <!-- Login Form -->
+    <form class="form active" id="login-form">
+      <div class="input-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="Enter your email" required />
+      </div>
+     <div class="input-group">
+  <label for="password">Password</label>
+  <div class="password-wrapper">
+    <input type="password" id="login-password" placeholder="Enter password">
+    <i class="fas fa-eye toggle-password" data-target="login-password"></i>
+  </div>
+</div>
+      <div class="input-options">
+        <label><input type="checkbox" /> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+
+      <div class="social-login">
+        <button type="button" class="google"><i class="fab fa-google"></i> Google</button>
+        <button type="button" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+        <button type="button" class="twitter"><i class="fab fa-twitter"></i> Twitter</button>
+      </div>
+    </form>
+
+    <!-- Signup Form -->
+    <form class="form" id="signup-form">
+      <div class="input-group">
+        <label for="signup-name">Full Name</label>
+        <input type="text" id="signup-name" placeholder="Enter your name" required />
+      </div>
+      <div class="input-group">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" placeholder="Enter your email" required />
+      </div>
+    <div class="input-group">
+  <label for="password">Password</label>
+  <div class="password-wrapper">
+    <input type="password" id="login-password" placeholder="Enter password">
+    <i class="fas fa-eye toggle-password" data-target="login-password"></i>
+  </div>
+</div>
+      <div class="input-options">
+        <label><input type="checkbox" required /> I agree to terms</label>
+      </div>
+      <button type="submit" class="submit-btn">Signup</button>
+
+      <div class="social-login">
+        <button type="button" class="google"><i class="fab fa-google"></i> Google</button>
+        <button type="button" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+        <button type="button" class="twitter"><i class="fab fa-twitter"></i> Twitter</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
